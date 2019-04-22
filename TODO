@@ -1,0 +1,33 @@
+Built-ins
+----------
+
+- Add builtins for various tasks:
+ set, unset, env, export,
+ cd,
+ for, while, if,
+ etc...
+
+Scrollback
+----------
+
+- Allow scrolling back and forth (using arrow keys)
+- Add command history support
+
+Environment
+-----------
+
+- Allow listing and modifying environment
+
+Command interpretation/Syntax
+-----------------------
+
+- Add support for setting environment variables from cmdline
+- Define shell syntax and/or language
+- Bracket, quote expansion
+
+Misc
+-----
+
+- Add support for file redirection
+- Add signal handling
+- Support for background/foreground tasks
