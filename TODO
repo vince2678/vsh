@@ -5,6 +5,7 @@ Built-ins
  set, unset, env, export,
  cd,
  for, while, if,
+ exit,
  etc...
 
 Scrollback
