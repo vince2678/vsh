@@ -46,8 +46,8 @@ int exec(char *args)
     else
     {
 #if 0
-        close(pipefd[FD_READ]);
-        dup2(pipefd[FD_WRITE], STDOUT_FILENO);
+        close(pipefd[PIPE_READ]);
+        dup2(pipefd[PIPE_WRITE], STDOUT_FILENO);
 #endif
 
         char **argv = strtostrv(args, ' ');
