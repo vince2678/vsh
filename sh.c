@@ -72,6 +72,12 @@ void sh_loop()
     printf("%s@%s > ", getlogin(), hostname);
     fgets(args, 1024, stdin);
 
+    // strip newline at end
+    if (args[strlen(args) - 1] == '\n')
+    {
+        args[strlen(args) - 1] = 0;
+    }
+
     int retval = exec (args);
     fprintf(stderr, "Exit status: %i\n", retval);
 }
