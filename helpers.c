@@ -25,6 +25,9 @@ char **strtostrv(char *str, char sep)
     char **strv, **strv_i;
     int count;
 
+    if (str == NULL)
+        return NULL;
+
     count = count_char(str, sep) + 2;
 
     strv = malloc(sizeof(char*) * count);
