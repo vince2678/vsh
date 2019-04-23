@@ -2,7 +2,7 @@
 #include <stdlib.h> /* malloc */
 #include <stdio.h> /* perror */
 
-int charcount(char *str, char c)
+int count_char(char *str, char c)
 {
     int count = 0;
 
@@ -25,7 +25,7 @@ char **strtostrv(char *str, char sep)
     char **strv, **strv_i;
     int count;
 
-    count = charcount(str, sep) + 2;
+    count = count_char(str, sep) + 2;
 
     strv = malloc(sizeof(char*) * count);
 
