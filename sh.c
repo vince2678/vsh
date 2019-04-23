@@ -1,4 +1,6 @@
+#include "helpers.h"
 #include "sh.h"
+
 #include <sys/types.h>
 #include <sys/wait.h> /* waitpid */
 #include <fcntl.h> /* fd manipulation */
