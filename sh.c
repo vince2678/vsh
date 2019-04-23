@@ -8,6 +8,8 @@
 #include <stdio.h> /* fprintf, fread, fdopen, fopen, ... */
 #include <string.h> /* perror */
 
+const int MAX_CMDLINE_LENGTH = 1024;
+
 int exec(char *args)
 {
 #if 0
