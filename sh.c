@@ -6,16 +6,8 @@
 #include <stdio.h> /* fprintf, fread, fdopen, fopen, ... */
 #include <string.h> /* perror */
 
-//TODO: multi-threads?
-//TODO: fork?
-//fork, pipe, fnctl, wait, 
-//environ, envp
-//dup{2} for fds
-//pipe
-
 int exec(char *args)
 {
-    //int retval;
     int pipefd[2];
     pid_t cpid;
 
@@ -57,9 +49,6 @@ int exec(char *args)
             return -1;
         }
     }
-
-    //TODO: Set up pipes, exec process
-    //use dup2 to replace stdin/stdout in child
 
     return 0;
 }
