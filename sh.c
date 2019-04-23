@@ -52,6 +52,9 @@ void sh_loop()
 
 int main(int argc, char **argv)
 {
-    sh_loop();
+    while(1)
+    {
+        sh_loop();
+    }
     return 0;
 }
