@@ -61,21 +61,58 @@ int exec(char *args)
     return 0;
 }
 
+char *read_cmdline()
+{
+    char *args, c;
+    int i;
+
+    args = calloc(MAX_CMDLINE_LENGTH + 1, sizeof(char));
+
+    if (args == NULL)
+    {
+        perror("calloc");
+        return NULL;
+    }
+
+    i = 0;
+
+    while(i < MAX_CMDLINE_LENGTH)
+    {
+        c = fgetc(stdin);
+
+        if (c == EOF)
+            break;
+        else if (c == '\n')
+        {
+            if (args[i-1] == '\\')
+            {
+                /* overwrite previous '\' on next iter.
+                 and print prompt to enter text */
+                i = i - 1;
+                printf("> ");
+                continue;
+            }
+            break; /* else is superfluous */
+        }
+        args[i] = c;
+        i = i + 1;
+    }
+    /* null terminate string */
+    args[i] = 0;
+
+    return args;
+}
+
 void sh_loop()
 {
-    char args[MAX_CMDLINE_LENGTH];
     char hostname[24];
     gethostname(hostname, 24);
     printf("%s@%s > ", getlogin(), hostname);
-    fgets(args, MAX_CMDLINE_LENGTH, stdin);
 
-    // strip newline at end
-    if (args[strlen(args) - 1] == '\n')
-    {
-        args[strlen(args) - 1] = 0;
-    }
+    char *cmdline = read_cmdline();
+    int retval = exec(cmdline);
+    free(cmdline);
 
-    int retval = exec (args);
     fprintf(stderr, "Exit status: %i\n", retval);
 }
 
