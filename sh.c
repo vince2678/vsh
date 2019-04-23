@@ -1,9 +1,9 @@
 #include "sh.h"
-#include <sys/types.h> //fork?
+#include <sys/types.h>
 #include <sys/wait.h> /* waitpid */
-#include <fcntl.h> //File desc. constants
-#include <unistd.h> //exec{l,le,v,vp,vpe}, dup, dup2
-#include <stdio.h> //fprintf, fread, fdopen, fopen, etc
+#include <fcntl.h> /* fd manipulation */
+#include <unistd.h> /* exec{l,le,v,vp,vpe}, dup, dup2 */
+#include <stdio.h> /* fprintf, fread, fdopen, fopen, ... */
 #include <string.h> /* perror */
 
 //TODO: multi-threads?
