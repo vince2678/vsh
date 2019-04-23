@@ -1,8 +1,54 @@
-#include <string.h>
+#include <string.h> /* strtok */
+#include <stdlib.h> /* malloc */
+#include <stdio.h> /* perror */
 
-//TODO: Implement this function
+int charcount(char *str, char c)
+{
+    int count = 0;
+
+    char *next = str;
+
+    while(*next)
+    {
+        if (*next == c)
+            count += 1;
+        next++;
+    }
+
+    return count;
+}
+
 char **strtostrv(char *str, char sep)
 {
-    char **strv;
+    char delim[2];
+    char *token;
+    char **strv, **strv_i;
+    int count;
+
+    count = charcount(str, sep) + 2;
+
+    strv = malloc(sizeof(char*) * count);
+
+    if (strv == NULL)
+    {
+        perror("malloc");
+        return NULL;
+    }
+
+    strv_i = strv;
+
+    sprintf(delim, "%c", sep);
+
+    token = strtok(str, delim);
+
+    while(token)
+    {
+        *strv_i = token;
+        token = strtok(NULL, delim);
+        strv_i = strv_i + 1;
+    }
+
+    *strv_i = (char *) NULL;
+
     return strv;
 }
