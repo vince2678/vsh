@@ -55,3 +55,19 @@ char **strtostrv(char *str, char sep)
 
     return strv;
 }
+
+int strvlen(char **strv)
+{
+    char **strv_i;
+    int len;
+
+    strv_i = strv;
+    len = 0;
+
+    while (*strv_i)
+    {
+        len = len + 1;
+        strv_i = strv_i + 1;
+    }
+    return len;
+}
