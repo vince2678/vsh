@@ -107,8 +107,8 @@ char *read_cmdline()
 
 void sh_loop()
 {
-    char hostname[24];
-    gethostname(hostname, 24);
+    char hostname[STR_SIZE];
+    gethostname(hostname, STR_SIZE);
     printf("%s@%s > ", getlogin(), hostname);
 
     char *cmdline = read_cmdline();
