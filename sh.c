@@ -55,11 +55,11 @@ int exec(char *args)
 
 void sh_loop()
 {
-    char args[1024];
+    char args[MAX_CMDLINE_LENGTH];
     char hostname[24];
     gethostname(hostname, 24);
     printf("%s@%s > ", getlogin(), hostname);
-    fgets(args, 1024, stdin);
+    fgets(args, MAX_CMDLINE_LENGTH, stdin);
 
     // strip newline at end
     if (args[strlen(args) - 1] == '\n')
