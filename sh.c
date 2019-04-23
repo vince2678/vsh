@@ -119,6 +119,11 @@ char *read_cmdline()
         args[i] = c;
         i = i + 1;
     }
+
+    if (i == MAX_CMDLINE_LENGTH)
+        fprintf(stderr, "%s:Command line length limit of %i characters reached.\n",
+            SHELL_NAME, MAX_CMDLINE_LENGTH);
+
     /* null terminate string */
     args[i] = 0;
 
