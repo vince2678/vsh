@@ -1,6 +1,7 @@
 #include "helpers.h"
 #include "sh.h"
 
+#include <errno.h> /* errno */
 #include <sys/types.h>
 #include <sys/wait.h> /* waitpid */
 #include <fcntl.h> /* fd manipulation */
@@ -56,7 +57,14 @@ int exec(char *args)
         if (argv && argv[0] && strlen(argv[0]) > 0)
         {
             execvp(argv[0], argv);
-            perror("execvp");
+
+            int err = errno;
+
+            if (err == ENOENT)
+                fprintf(stderr, "%s: %s: Command not found\n", SHELL_NAME, argv[0]);
+            else
+                fprintf(stderr, "%s: %s: %s\n", SHELL_NAME, argv[0], strerror(err));
+
             return -1;
         }
     }
