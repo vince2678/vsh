@@ -11,7 +11,7 @@ Built-ins
 Scrollback
 ----------
 
-- Allow scrolling back and forth (using arrow keys)
+- Allow scrolling back and forth (using arrow keys) (ncurses for sideways movement?)
 - Add command history support
 
 Environment
