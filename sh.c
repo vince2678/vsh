@@ -71,6 +71,9 @@ void sh_loop()
     gethostname(hostname, 24);
     printf("%s@%s > ", getlogin(), hostname);
     fgets(args, 1024, stdin);
+
+    int retval = exec (args);
+    fprintf(stderr, "Exit status: %i\n", retval);
 }
 
 int main(int argc, char **argv)
