@@ -1,8 +1,10 @@
 #include "sh.h"
 #include <sys/types.h> //fork?
+#include <sys/wait.h> /* waitpid */
 #include <fcntl.h> //File desc. constants
 #include <unistd.h> //exec{l,le,v,vp,vpe}, dup, dup2
 #include <stdio.h> //fprintf, fread, fdopen, fopen, etc
+#include <string.h> /* perror */
 
 //TODO: multi-threads?
 //TODO: fork?
@@ -32,7 +34,28 @@ int exec(char *args)
     }
     else if (cpid > 0)
     {
-        return cpid;
+        int wstatus;
+
+        waitpid(cpid, &wstatus, 0);
+
+        if (WIFEXITED(wstatus))
+            return WEXITSTATUS(wstatus);
+        else //TODO: possibly do more checks here
+            return 1;
+    }
+    else
+    {
+        //close(pipefd[FD_READ]);
+        //dup2(pipefd[FD_WRITE], STDOUT_FILENO);
+
+        char **argv = strtostrv(args, ' ');
+
+        if (argv && argv[0] && strlen(argv[0]) > 0)
+        {
+            execvp(argv[0], argv);
+            perror("execvp");
+            return -1;
+        }
     }
 
     //TODO: Set up pipes, exec process
