@@ -6,6 +6,7 @@
 #include <fcntl.h> /* fd manipulation */
 #include <unistd.h> /* exec{l,le,v,vp,vpe}, dup, dup2 */
 #include <stdio.h> /* fprintf, fread, fdopen, fopen, ... */
+#include <stdlib.h> /* getenv, setenv, ... */
 #include <string.h> /* perror */
 
 const int MAX_CMDLINE_LENGTH = 1024;
@@ -109,7 +110,8 @@ void sh_loop()
 {
     char hostname[STR_SIZE];
     gethostname(hostname, STR_SIZE);
-    printf("%s@%s > ", getlogin(), hostname);
+
+    printf("%s@%s > ", getenv("USER"), hostname);
 
     char *cmdline = read_cmdline();
     int retval = exec(cmdline);
