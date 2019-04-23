@@ -66,7 +66,7 @@ int exec(char *args)
 
 char *read_cmdline()
 {
-    char *args, c;
+    char *args, c, *pairptr;
     int i;
 
     args = calloc(MAX_CMDLINE_LENGTH + 1, sizeof(char));
@@ -78,6 +78,7 @@ char *read_cmdline()
     }
 
     i = 0;
+    pairptr = NULL;
 
     while(i < MAX_CMDLINE_LENGTH)
     {
@@ -95,7 +96,25 @@ char *read_cmdline()
                 printf("> ");
                 continue;
             }
-            break; /* else is superfluous */
+            else if (pairptr != NULL)
+            {
+                printf("> ");
+            }
+            else
+            {
+                break;
+            }
+        }
+        else if (c == '"' || c == '\'' || c == '`')
+        {
+            if (pairptr == NULL)
+            {
+                pairptr = args + i;
+            }
+            else if (*pairptr == c)
+            {
+                pairptr = NULL;
+            }
         }
         args[i] = c;
         i = i + 1;
