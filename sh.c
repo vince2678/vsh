@@ -10,14 +10,18 @@
 
 int exec(char *args)
 {
+#if 0
     int pipefd[2];
+#endif
     pid_t cpid;
 
+#if 0
     if (pipe(pipefd) == -1)
     {
         perror("pipe");
         return -1;
     }
+#endif
 
     cpid = fork();
 
@@ -39,8 +43,10 @@ int exec(char *args)
     }
     else
     {
-        //close(pipefd[FD_READ]);
-        //dup2(pipefd[FD_WRITE], STDOUT_FILENO);
+#if 0
+        close(pipefd[FD_READ]);
+        dup2(pipefd[FD_WRITE], STDOUT_FILENO);
+#endif
 
         char **argv = strtostrv(args, ' ');
 
